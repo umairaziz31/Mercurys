@@ -1,0 +1,296 @@
+<style>
+  .drink-menu{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    padding: 50px 0;
+  }
+  .drink-menu .contain-site-width{
+    padding: 0 20px;
+  }
+  .drink-menu .head-sec{
+    text-align: center;
+  }
+  .drink-menu .head-sec h2{
+    color: #fff;
+    font-family: Saira Condensed;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 80px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .drink-menu .head-sec h2 strong{
+    color: #D32541;
+  }
+  .drink-menu .head-sec p{
+    color: #FFF;
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 3.6px;
+    margin: 0 0 60px;
+  }
+  .drink-menu .head-sec h5.btn-text{
+    padding: 15px;
+    background-color: #fff;
+    font-family: Saira Condensed;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0.055em;
+    text-align: center;    
+    margin: 0 0 60px;
+    display: inline-block;
+  }
+  .drink-menu.roastery-menu .menu-content{
+    display: block;
+    grid-gap: 20px;
+    column-count: 2;
+    break-inside: avoid;
+  }
+  .drink-menu .menu-content .list-inner{
+    display: inline-block;
+  }
+  .drink-menu .menu-content .list-inner.left{
+    grid-column: 1;
+  }
+  .drink-menu .menu-content .list-inner.right{
+    grid-column: 2;
+  }
+  .drink-menu .menu-content .list-inner h3.category-title{
+    color: #FFF;
+    font-family: Saira Condensed;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 6px;
+    margin: 0 0 10px;
+  }
+  .drink-menu .menu-content .menu-inner h3{
+    font-family: Saira Condensed;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color: #D32541;
+    margin: 0 0 20px;
+  }
+  .drink-menu.roastery-menu .menu-content p strong{
+    color: #FFF;
+    opacity: 1;
+  }
+  .drink-menu .menu-content p{
+    color: rgba(255,255,255,.7);
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 1.5px;
+    margin: 0 0 20px;
+    display: block;
+  }  
+
+  /* optional list */
+  .optional-list.left{
+    grid-column: 1;
+  }
+  .optional-list.right{
+    grid-column: 2;
+  }
+  .optional-list .op-inner{
+    column-count: 2;
+    column-gap: 20px;
+    break-after: avoid;
+  }
+  .optional-list p.red-text{
+    color: #D32541;
+    letter-spacing: 0.7px;
+    text-transform: capitalize;
+    font-size: 25px;
+    opacity: 1;
+    margin: 20px 0 0;
+    font-family: Saira Condensed;
+  }
+
+  @media(max-width: 767px){
+    .drink-menu{
+      padding-top: 30px;
+    }
+    .drink-menu .menu-content{
+      grid-template-columns: 1fr;
+    }
+    .drink-menu .head-sec h2, .drink-menu .menu-content h3{
+      font-size: 30px;
+      line-height: 50px;
+    }
+    .drink-menu .head-sec p, .drink-menu .head-sec h5.btn-text,
+    .drink-menu .menu-content h4, .drink-menu .menu-content p{    
+      font-size: 15px;    
+      line-height: 22px;
+    }
+    .drink-menu .head-sec p{
+      margin: 0 0 30px;
+    }
+    .drink-menu .head-sec h5.btn-text{
+      margin: 0 0 30px;
+    }
+    .drink-menu.roastery-menu .menu-content{      
+      column-count: unset;
+    }
+    .drink-menu .menu-content .list-inner{
+      margin: 0 0 30px;
+    }
+    .drink-menu .menu-content .list-inner h3.category-title{
+      font-size: 35px;
+      line-height: 45px;
+    }
+    .drink-menu .menu-content .menu-inner h3{
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+</style>
+
+<div class="drink-menu roastery-menu">
+  <div class="contain-site-width">
+    <header class="head-sec">      
+      {%- unless section.settings.heading == blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+        {% if section.settings.content != blank %}
+          {{ section.settings.content }}
+        {% endif %}
+      {% endunless %}      
+    </header>
+    <div class="menu-content">      
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'list' %}
+          <div class="list-inner {{ block.settings.column }}">          
+            <h3 class="category-title">{{ block.settings.category_title }}</h3>          
+            <div class="menu-inner">            
+              <h3>{{ block.settings.heading }}</h3>
+              {% for i in (1..10) %}
+                {% capture content %}content{{i}}{% endcapture %}
+                {% if block.settings[content] %}
+                {{ block.settings[content] }}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Roastery Menu",
+    "settings": [      
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Drink Menu",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "list",
+      "name": "List",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "default": "left",
+          "options": [
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ]
+        },
+        {
+          "type": "inline_richtext",
+          "id": "category_title",
+          "label": "Category Heading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "CLASSIC",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content1",
+          "label": "Content 1"
+        },
+        {
+          "type": "richtext",
+          "id": "content2",
+          "label": "Content 2"
+        },
+        {
+          "type": "richtext",
+          "id": "content3",
+          "label": "Content 3"
+        },
+        {
+          "type": "richtext",
+          "id": "content4",
+          "label": "Content 4"
+        },
+        {
+          "type": "richtext",
+          "id": "content5",
+          "label": "Content 5"
+        },
+        {
+          "type": "richtext",
+          "id": "content6",
+          "label": "Content 6"
+        },
+        {
+          "type": "richtext",
+          "id": "content7",
+          "label": "Content 7"
+        },
+        {
+          "type": "richtext",
+          "id": "content8",
+          "label": "Content 8"
+        },
+          {
+          "type": "richtext",
+          "id": "content9",
+          "label": "Content 9"
+        },
+          {
+          "type": "richtext",
+          "id": "content10",
+          "label": "Content 10"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Roastery Menu Section",
+      "blocks": [
+        {
+          "type": "list"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}

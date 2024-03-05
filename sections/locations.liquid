@@ -1,0 +1,360 @@
+<style>
+.order-btn a{
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 19.5px 20px !important;
+  font-size: 35px !important;
+}
+.locations .card__image-wrapper{
+    padding-top: 100% !important;
+  }
+  .locations .card__image-wrapper img{
+    object-fit: cover;
+  }
+
+  @media(max-width: 700px){
+    .locations .feature-row{
+      flex-direction: column-reverse;
+    }
+    .feature-row__item{
+      padding: 20px;
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="featured-row locations section-standard {% unless section.settings.section_padding %}no-border{% endunless %}" data-section-id="{{ section.id }}" data-section-type="featured-row-section">
+
+  
+  {% for block in section.blocks %}
+    
+   
+  <div class="contain-site-width {% unless block.settings.section_padding %}no-padding{% endunless %}">
+    <div class="wrapper">
+
+      <div class="feature-row">
+        {% capture image_grid_item %}
+          
+          <div class="feature-row__item feature-row__image">
+            {%- assign image = block.settings.image -%}
+            {% if image != blank %}
+              <div class="card__image-wrapper" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%">
+                {% assign image_widths = '295,394,590,1180' %}
+                {% include 'theme-rias' %}
+                <img class="card__image feature-row__image lazyload fade-in"
+                  data-src="{{ image_url_pattern }}"
+                  data-widths="[{{ image_widths }}]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ image.alt | escape }}">
+                <noscript>
+                  <img class="card__image" src="{{ image | img_url: '590x' }}" alt="{{ image.alt | escape }}">
+                </noscript>
+              </div>
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+          </div>
+        
+        {% endcapture %}
+
+        {% if block.settings.layout == 'left' %}
+          {{ image_grid_item }}
+        {% endif %}
+
+
+        <div class="feature-row__item">
+          <div class="feature-row__text feature-row__text--{{ block.settings.layout }} feature-row__text--align__{{ block.settings.text_align }}" style="padding-right: 4.875em;">
+          {% if block.settings.title != blank %}
+            <h1 class="sc blk lsp2" style="font-size: 50px;    margin: 0 0 0.1em; line-height:48px;">{{ block.settings.title | escape }}</h1>
+          {% endif %}
+          
+          {% if block.settings.drive != blank %}
+            <div class="drive rte sc lsp2" style="font-size: 30px;" >
+              {{ block.settings.drive }}
+            </div>
+          {% endif %}
+         <hr>
+          
+          {% if block.settings.address != blank %}
+            <div class="address rte sc  lsp2" style="font-size: 20px;line-height:20px"> 
+             {% include 'icon-map' %} {{ block.settings.address }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.phone != blank %}
+            <div class="phone rte sc  lsp2" style="font-size: 20px;">
+             {% include 'icon-phone' %} {{ block.settings.phone }}
+            </div>
+          {% endif %}
+  <br>
+          {% if block.settings.timing != blank %}
+            <div class="time rte sc  lsp2" style="font-size: 20px;">
+            {% include 'icon-time' %}
+            <div class="timing sc rb lsp2" style="font-size: 20px;">
+               <div> <span class="hours sc" >  {{ block.settings.timing }} </span> </div>
+              {% if block.settings.timing_1 != blank %}
+            <div> <span class="hours sc">  {{ block.settings.timing_1 }} </span></div>
+               {% endif %}
+            </div>
+            </div>
+          {% endif %}
+
+          <br>
+          <br class="desktop">
+                        
+         </div>   
+            <div class="btn-div sc order-btn">
+              {% if block.settings.button_label != blank  %}
+                <a href="{{ block.settings.button_link }}" class="button outline sc oa lsp2">
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {% endif %}
+          </div> 
+             <div class="btn-two-div sc">
+              {% if block.settings.button_label_2 != blank  %}
+                <a href="{{ block.settings.button_link_2 }}" class="button outline long-btn sc lsp3 fs35">
+                  {{ block.settings.button_label_2 | escape }}
+                </a>
+              {% endif %}
+          </div>  
+        </div>
+     
+
+        {% if block.settings.layout == 'right' %}
+          {{ image_grid_item }}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+  <hr class="mobile" style="border:1px solid #f1f2f4">
+
+{% endfor %}
+  
+</div>
+<style>
+   .locations .feature-row {
+       align-items: flex-end !important;
+    }
+  .drive {
+      color: #d32541;
+    font-weight: bold;font-size: larger;
+    }
+
+.drive p{margin-bottom: 10px;}
+  
+ .locations hr {
+  margin: 0 0 40px 0;
+   color: #d32541;
+       border: 2px solid #d32541;
+}
+
+.blk{color:black !important;}
+  
+  .btn-div{
+    text-align:center;
+  }
+  .time span.hours{
+    color: #d32541;
+  }
+  @media(min-width: 699px){
+ .locations .button.outline{
+    width: 50%;
+    display: block;
+    text-align: center;
+    padding: 0px 12px;
+    background: #d32541;
+    color: white;
+    border-color: #d32541;
+    font-size: 20px;
+    font-weight: 800;
+  margin: auto;
+  margin-top: 50px;
+  }  
+    .oa{margin:auto 30.5% !important;font-weight: 600 !important;}
+
+    .mobile{display:none !important}
+  }
+
+  @media(max-width: 699px){
+ .locations .button.outline{
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 0px 12px;
+    background: #d32541;
+    color: white;
+    border-color: #d32541;
+    font-size: 20px;
+    font-weight: 800;
+  margin: auto;
+  }
+      .oa{font-weight: 600 !important;}
+
+    .desktop{display:none !important}
+    
+  }
+ .locations .button.outline.long-btn{
+    width: 100% !important;
+    background: black;
+    color: white;
+    border-color: black;
+     margin-top: 0;
+  }
+  .time.rte,
+  .phone.rte,
+  .address.rte {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+  .address.rte p{
+    line-height: 1.2;
+    letter-spacing: 1px;
+  }
+  
+.address.rte svg{
+height: 20px !important;
+    width: 20px !important;
+    margin-top: 0;
+}
+.time.rte svg{
+  height: 20px;
+  width:20px;  margin-top: 5px;
+}
+  .phone.rte svg{
+  height: 20px;
+  width:20px;  margin-top: 5px;
+}
+    @media screen and (min-width: 700px){
+     .locations .feature-row__text--right {
+        padding-right: 4.5em;
+        padding-left: 4.5em;
+      }
+    }
+    @media screen and (max-width: 699px){
+.feature-row__text {
+  padding: 0rem !important;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Locations",
+  "class": "featured-row-section",
+  "blocks":[
+    {
+            "name":"location",
+            "type":"loaction",
+            "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_padding",
+      "label": "Show spacing around section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Image on left"
+        },
+        {
+          "value": "right",
+          "label": "Image on right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text align",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Image with text"
+    },
+    {
+      "type": "richtext",
+      "id": "drive",
+      "label": "Drive"
+    },
+    {
+      "type": "html",
+      "id": "address",
+      "label": "Address"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+    {
+      "type": "textarea",
+      "id": "timing",
+      "label": "Timing 1"
+    },
+    {
+      "type": "textarea",
+      "id": "timing_1",
+      "label": "Timing 2"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Button label 2"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button link 2"
+    }
+  ]
+  }
+  ],
+  "presets": [
+    {
+      "name": "Locations",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,211 @@
+ <style>
+         *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+   .maincareer1 p{
+/*      color: black !important; */
+   }
+   .maincareer1{
+    width: 100%;
+     height: 100%;
+            background: url(https://cdn.shopify.com/s/files/1/0529/8647/8778/files/career1.png?v=1689602090);
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+   }
+        .secctioncareer1{
+            height: 100%;
+/*             max-width: 1400px; */
+/*             margin: auto; */
+            width: 100%;
+/*             background: url(https://cdn.shopify.com/s/files/1/0529/8647/8778/files/career1.png?v=1689602090);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+        .secctioncareer1 .right{
+            height: 100%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 20px;
+            /* padding-top: 60px; */
+        }
+        .secctioncareer1 .right img{
+            /* height: 100%; */
+          margin-top: 15%;
+            width: 100%;
+            object-fit: cover;
+        }
+        .secctioncareer1 .left{
+            height: 100%;
+            /* border: 2px solid red; */
+            width: 50%;
+        
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+           padding:0 2%;
+/*             gap: 25px; */
+        }
+        .secctioncareer1 .left h1{
+            font-size: 60px;
+            font-weight: 700;
+            color: white;
+            /* text-align: center; */
+            padding-bottom: 20px;
+          margin: 0;
+            font-family: Saira Condensed;
+/* font-size: 63px; */
+font-weight: 700;
+line-height: 62px;
+letter-spacing: 0.12em;
+text-align: left;
+
+        }
+        .secctioncareer1 .left p{
+            font-size: 20px;
+            font-weight: 500;
+            color: white;
+            /* text-align: center; */
+            padding-bottom: 20px;
+            font-family: Saira Condensed;
+/* font-size: 25px; */
+font-weight: 400;
+line-height: 29px;
+letter-spacing: 0.14em;
+text-align: left;
+font-family: 'Saira Condensed', sans-serif !important;
+    /* text-align: center; */
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 2px;
+/*           width: 80%; */
+        }
+        .secctioncareer1 .left button, .secctioncareer1 .left a{
+            /* height: 50px; */
+          padding: 10px 20px;
+            width: 200px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: 500;
+            color: black;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: Saira Condensed;
+/* font-size: 30px; */
+font-weight: 700;
+line-height: 30px;
+          margin-top: 30px;
+letter-spacing: 0.085em;
+/* text-align: left; */
+          text-align: center;
+                  text-decoration: none;
+
+        }
+        .secctioncareer1 .left button:hover{
+            background-color: #D32541;
+            color: white;
+            transform: scale(1.1);
+        }
+
+
+
+        /* make this responsive  */
+        @media only screen and (max-width: 600px){
+          .secctioncareer1 .right {
+            padding-right: 3px;
+          }
+/*             .secctioncareer1{
+                flex-direction: column;
+            } */
+/*             .secctioncareer1 .right{
+                width: 100%;
+                height: 50%;
+                padding-right: 0;
+                padding-top: 0;
+            } */
+           .maincareer1{
+             background-position: inherit;
+           }
+            .secctioncareer1 .right img{
+                margin-top: 0;
+            }
+            .secctioncareer1 .left{
+               width: 50%;
+                height: 50%;
+                padding: 0;
+                padding-left: 8px;
+    padding-right: 3px;
+            }
+          .secctioncareer1 .left p{
+            padding-bottom: 0px;
+             width: 100%;
+          }
+            .secctioncareer1 .left h1{
+                font-size:21px;
+                line-height: 20px;
+              padding-bottom: 0px;
+            }
+            .secctioncareer1 .left p{
+                font-size: 12px;
+                line-height: 12px;
+              margin-top: 12px;
+            }
+            .secctioncareer1 .left button{
+                font-size: 15px;
+                line-height: 15px;
+               height: 30px;
+            width: 100px;
+              margin-top: 5px;
+            }
+        }
+        </style>
+<div class="maincareer1">
+        <section class="secctioncareer1 contain-site-width">
+            <div class="left">
+                <h1 class="headingad">CAREERS AT <b style="color: #D32541;">MERCURYS</b> COFFEE</h1>
+                <p>We are currently seeking talented individuals to join our
+                    team. Check out our latest job openings below:</p>
+                <a href="https://www.indeed.com/cmp/Mercurys-Coffee-Co.-2">APPLY NOW</a>
+            </div>
+            <div class="right">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/career2.png?v=1689602092" alt>
+            </div>
+        </section>
+</div>
+
+
+{% schema %}
+ {
+    "name": "career-Section-1",
+    "settings": [],
+    "presets": [
+      {
+        "name": "career-Section-1"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

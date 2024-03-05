@@ -1,0 +1,434 @@
+<style>
+  .drink-menu{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    padding: 50px 0;
+  }
+  .drink-menu .contain-site-width{
+    padding: 0 20px;
+  }
+  .drink-menu .head-sec{
+    text-align: center;
+  }
+  .drink-menu .head-sec h2{
+    color: #fff;
+    font-family: Saira Condensed;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 80px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .drink-menu .head-sec h2 strong{
+    color: #D32541;
+  }
+  .drink-menu .head-sec p{
+    color: #FFF;
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 3.6px;
+    margin: 0 0 60px;
+  }
+  .drink-menu .top-btn-flex{
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    margin: 0 0 60px;
+  }
+  .drink-menu .top-btn-flex .inner{
+    /* width: 50%; */
+  }
+  .drink-menu .head-sec h5.btn-text{
+    padding: 15px;
+    font-family: Saira Condensed;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0.055em;
+    text-align: center;    
+    margin: 0;
+    display: inline-block;
+  }
+  .drink-menu .menu-content{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: max-content;
+  }
+  .drink-menu .menu-content h3{
+    font-family: Saira Condensed;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 80px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color: #D32541;
+    margin: 0 0 20px;
+  }
+  .drink-menu .menu-content h4{
+    color: #FFF;
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 1.5px;
+    margin: 0;
+  }
+  .drink-menu .menu-content p{
+    color: #FFF;
+    opacity: .7;
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 1.5px;
+    margin: 0 0 20px;
+    display: inline-block;
+  }  
+
+  /* optional list */
+  .optional-list.left{
+    grid-column: 1;
+  }
+  .optional-list.right{
+    grid-column: 2;
+  }
+  .optional-list .op-inner{
+    column-count: 2;
+    column-gap: 20px;
+    break-after: avoid;
+  }
+  .optional-list p.red-text{
+    color: #D32541;
+    letter-spacing: 0.7px;
+    text-transform: capitalize;
+    font-size: 25px;
+    opacity: 1;
+    margin: 20px 0 0;
+    font-family: Saira Condensed;
+  }
+
+  @media(max-width: 767px){
+    .drink-menu{   
+      padding: 50px 0 0;
+    }
+    .drink-menu{
+      padding-top: 30px;
+    }
+    .drink-menu .menu-content{
+      grid-template-columns: 1fr;
+      display: block;
+    }
+    .drink-menu .head-sec h2, .drink-menu .menu-content h3{
+      font-size: 30px;
+      line-height: 50px;
+    }
+    .drink-menu .head-sec p, .drink-menu .head-sec h5.btn-text,
+    .drink-menu .menu-content h4, .drink-menu .menu-content p{    
+      font-size: 15px;    
+      line-height: 22px;
+    }
+    .drink-menu .head-sec p{
+      margin: 0 0 30px;
+    }
+    .drink-menu .head-sec h5.btn-text{
+      margin: 0;
+    }
+    .drink-menu .top-btn-flex{
+      flex-direction: column;
+      margin: 0 0 30px;
+    }
+    .drink-menu .top-btn-flex .inner{
+      padding: 0;
+    }
+    .drink-menu .head-sec h5.btn-text{
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="drink-menu">
+  <div class="contain-site-width">
+    <header class="head-sec">      
+      {%- unless section.settings.heading == blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+        {% if section.settings.content != blank %}
+          {{ section.settings.content }}
+        {% endif %}
+      {% endunless %}
+      <div class="top-btn-flex">
+        {% if section.settings.hot_drink != blank %}
+          <div class="inner">          
+            <h5 class="btn-text">{{ section.settings.hot_drink }}</h5>          
+          </div>
+        {% endif %}
+        {% if section.settings.cold_drink != blank %}
+          <div class="inner">        
+            <h5 class="btn-text btn-text2">{{ section.settings.cold_drink }}</h5>          
+          </div>
+        {% endif %}
+      </div>
+    </header>
+    <div class="menu-content">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'list' %}
+          <div class="menu-inner">
+            <h3>{{ block.settings.heading }}</h3>
+            {% for i in (1..7) %}
+              {% capture title %}title{{i}}{% endcapture %}
+              {% capture content %}content{{i}}{% endcapture %}
+              {% if block.settings[title] %}
+              <h4>{{ block.settings[title] }}</h4>
+              {% endif %}
+              {% if block.settings[content] %}
+                {{ block.settings[content] }}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          {% when 'optional_list' %}
+          <div class="optional-list {{ block.settings.alignment }}">
+            <h3>{{ block.settings.heading }}</h3>
+            <div class="op-inner">
+              {% for i in (1..10) %}
+                {% capture title %}title{{i}}{% endcapture %}
+                <h4>{{ block.settings[title] }}</h4>
+              {% endfor %}
+            </div>
+            <p class="red-text">{{ block.settings.btm_text }}</p>
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Drink Menu",
+    "settings": [      
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Drink Menu",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "hot_drink",
+        "default": "HOT DRINKS: 8oz, 12oz, 16oz, 20oz, 24oz",
+        "label": "Hot Drink Text"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "cold_drink",
+        "default": "ICE & BLENDED: 12oz, 16oz, 24oz, 32oz",
+        "label": "Cold Drink Text"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "list",
+      "name": "List",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "CLASSIC",
+          "label": "Heading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title1",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 1"
+        },
+        {
+          "type": "richtext",
+          "id": "content1",
+          "label": "Content 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title2",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 2"
+        },
+        {
+          "type": "richtext",
+          "id": "content2",
+          "label": "Content 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title3",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 3"
+        },
+        {
+          "type": "richtext",
+          "id": "content3",
+          "label": "Content 3"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title4",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 4"
+        },
+        {
+          "type": "richtext",
+          "id": "content4",
+          "label": "Content 4"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title5",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 5"
+        },
+        {
+          "type": "richtext",
+          "id": "content5",
+          "label": "Content 5"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title6",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 6"
+        },
+        {
+          "type": "richtext",
+          "id": "content6",
+          "label": "Content 6"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title7",
+          "default": "LATTE OR CAPPUCCINO",
+          "label": "Title 7"
+        },
+        {
+          "type": "richtext",
+          "id": "content7",
+          "label": "Content 7"
+        }
+      ]
+    },
+    {
+      "type": "optional_list",
+      "name": "Optional List",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "default": "right",
+          "options": [
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ]
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "OPTIONAL ITEMS",
+          "label": "Heading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title1",
+          "default": "FLAVORS",
+          "label": "Title 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title2",
+          "default": "FLAVORS",
+          "label": "Title 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title3",
+          "default": "FLAVORS",
+          "label": "Title 3"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title4",
+          "default": "FLAVORS",
+          "label": "Title 4"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title5",
+          "default": "FLAVORS",
+          "label": "Title 5"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title6",
+          "default": "FLAVORS",
+          "label": "Title 6"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title7",
+          "default": "FLAVORS",
+          "label": "Title 7"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title8",
+          "default": "FLAVORS",
+          "label": "Title 8"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title9",
+          "default": "FLAVORS",
+          "label": "Title 9"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title10",
+          "default": "FLAVORS",
+          "label": "Title 10"
+        },
+        {
+          "type": "header",
+          "content": "Bottom Text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "btm_text",
+          "default": "Organic whole bean coffee: 12oz - $15.99  5 lbs -75.99",
+          "label": "Bottom Text"
+        }
+      ]
+    } 
+  ],
+  "presets": [
+    {
+      "name": "Drink Menu Section",
+      "blocks": [
+        {
+          "type": "list"
+        }
+      ]
+    }
+  ]
+  }
+{% endschema %}

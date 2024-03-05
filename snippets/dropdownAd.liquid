@@ -1,0 +1,133 @@
+<style>
+    *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       .dropdownAd{
+           background-color: #1B1B1B;
+/*            position: absolute; */
+         position: absolute;
+    top: -100vh !important;
+    width: 99vw;
+    left: -24px;
+           transition: all 0.4s ease;
+/*           display:none; */
+             z-index: -999999999999999;
+       }
+       .dropdownAd ul{
+           display: flex;
+           justify-content: space-around;
+           flex-wrap: wrap;
+           align-items: center;
+       }
+       .activead{
+              top: 68px !important;
+       }
+       .dropdownAd ul li {
+           list-style: none;
+           /* padding: 10px 20px; */
+           font-size: 23px;
+           color: white;
+           font-weight: 700;
+           border-radius: 5px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           display: flex;
+           align-items: center;
+           align-items: center;
+           text-align: center;
+           text-decoration: none;
+         font-family: Saira Condensed;
+/* font-size: 40px; */
+font-weight: 700;
+line-height: 27px;
+letter-spacing: 0.135em;
+text-align: center;
+
+       }
+       .dropdownAd ul li:hover{
+           color: gray;
+       }
+       .dropdownAd ul li a{
+           text-decoration: none;
+           color: white;
+       }
+       .dropdownAd ul li a:hover{
+           color: #D32541;
+           text-decoration: underline;
+       }
+       .dropdownAd ul li img{
+           width: 100px;
+               }
+
+               @media screen and (max-width: 768px) {
+                  .dropdownAd ul {
+                   flex-direction: column;
+                   align-items: flex-start;
+                   gap: 10px;
+                  }
+                   .dropdownAd ul li {
+                       font-size: 15px;
+                       gap: 20px;
+                       font-family: Saira Condensed;
+font-size: 40px;
+font-weight: 700;
+line-height: 38px;
+letter-spacing: 0.135em;
+text-align: center;
+
+                   }
+                   .dropdownAd ul li img{
+                       width: 50px;
+                   }
+
+               }
+
+
+   </style>
+ 
+    
+
+       <div class="dropdownAd">
+           <ul>
+               <li><img style="width: 111px;"
+                           src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/hh4.png?v=1689339573"
+                           alt><a href="/collections/100-organic-coffee">BEANS</a></li>
+                <li><img
+                           src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/pr_50f59e80-3fec-444e-80de-ee0ef0c5d946.png?v=1689339577"
+                           alt><a href="/collections/drinkware">MUGS AND <br>SWAG</a></li>
+                <li><img
+                           src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/hh1.png?v=1689339573"
+                           alt><a href="/collections/rising-bakery">RISING <br> BAKERY</a></li>
+                <li><img style="margin-right: 10px;"
+                           src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/hh3.png?v=1689339573"
+                           alt><a href="/collections/gift-cards">GIFT CARDS</a></li>
+           </ul>
+       </div>
+
+       <script>
+       buttonad = document.querySelector('.site-nav li:nth-child(2) a');
+         console.log(buttonad)
+      
+      dropdownAd = document.querySelector('.dropdownAd');
+   
+         
+         buttonad.addEventListener('mouseover', () => {
+           console.log("mouse inn")
+           dropdownAd.classList.add('activead');
+       });
+
+         dropdownAd.addEventListener('mouseover', () => {
+           console.log("mouse inn")
+           dropdownAd.classList.add('activead');
+       });
+         dropdownAd.addEventListener('mouseout', () => {
+              console.log("mouse out")
+           dropdownAd.classList.remove('activead');
+       });
+         
+        
+    
+
+   </script>

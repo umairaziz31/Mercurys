@@ -1,0 +1,142 @@
+<div class="featured {% if product.images.size == 1 %}full-width{% endif %}" id="ProductPhoto-{{ section.id }}" data-ProductPhoto>  
+  <div class="product-image--slider" id="ProductImageSlider-{{ section.id }}" 
+    data-zoom="{{ section.settings.product_featured_zoom_enable }}" 
+    data-lightbox="{{ section.settings.product_featured_lightbox_enable }}"
+    data-show-arrows="{{ section.settings.show_arrows }}"
+    data-show-dots="{{ section.settings.show_dots }}"
+    data-slider-enabled="{{ section.settings.enable_image_slider }}" 
+    data-flickity-options='{
+      "adaptiveHeight": true,
+      "imagesLoaded": true,
+      "lazyLoad": true,
+      "wrapAround": true,
+      "fullscreen": true,
+      {% if product.images.size == 1 %}
+      "pageDots": false,
+      {% else %}
+      "pageDots": {{ section.settings.show_dots }},
+      {% endif %}
+      "prevNextButtons": true,
+      "selectedAttraction": 0.15,
+      "friction": 0.8,
+      "accessibility": false
+    }'
+    data-ProductImageSlider
+    data-product-single-media-group>
+    {%- for media in product.media -%}
+      {%- assign active_image = current_variant.featured_media | default: product.featured_media -%}
+
+      {% capture media_id %}FeaturedMedia-{{ section.id }}-{{ media.id }}{% endcapture %}
+      {% capture media_class %}product-featured-media{% endcapture %}
+      {% capture media_wrapper_id %}{{ media_id }}-wrapper{% endcapture %}
+
+      {% capture image_size %}1200x1200{% endcapture %}
+
+      <div id="{{ media_wrapper_id }}"
+        class="product-image--cell{% if media == active_image %} active-media{% endif %}"
+        {% if media == active_image %}data-initial-image{% else %}inert="true"{% endif %}
+        {% if media.media_type == 'image' %} data-product-media-type-image{% endif %}
+        {% if media.media_type == 'video' or media.media_type == 'external_video' %} data-product-media-type-video data-enable-video-looping="{{ section.settings.enable_video_looping }}"{% endif %}
+        {% if media.media_type == 'model' %} data-product-media-type-model{% endif %}
+        {% if media.media_type == 'external_video' %} data-video-id="{{ media.external_id }}"{% endif %}
+        data-product-single-media-wrapper
+        data-media-id="{{ section.id }}-{{ media.id }}"
+        data-media-type="{{ media.media_type }}"
+        data-image-id="{{ media.id }}"
+        data-index="{{ forloop.index0 }}">
+        {% case media.media_type %}
+          {% when 'image' %}
+            {%- assign image = media -%}
+            {%- assign image_width = image.width | append: 'x' -%}
+            {%- assign image_highresolution = image | img_url: '1400x' -%}
+            <div id="ProductImageCellContainer-{{ image.id }}" class="product-single__media">
+              <a href="{{ image_highresolution }}" id="CardImageContainer-{{ image.id }}" class="card__image-container" target="_blank" tabindex="-1">
+                {%- assign image_widths = '85,100,200,295,394,590,720,800,1200' -%}
+                {%- include 'theme-rias' -%}
+                <img id="ProductImage-{{ section.id }}-{{ image.id }}" class="lazyload"
+                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  data-id="{{ image.id }}"
+                  data-section-id="{{ section.id }}"
+                  data-src="{{ image_url_pattern }}"
+                  data-widths="[{{ image_widths }}]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  data-position="{{ image.position | minus: 1 }}"
+                  data-max-width="{{ image.width }}"
+                  alt="{{ image.alt | escape }}">
+                <noscript>
+                  <img src="{{ image | img_url: '590x' }}" alt="{{ image.alt | escape }}">
+                </noscript>
+                {% assign height = image.height | plus: 0 %}
+                {% assign width = image.width | plus: 0 %}
+                {% assign padding_ratio = height | times: 100 | divided_by: width %}
+                <style>
+                  .product-image--slider:not(.is-fullscreen) #ProductImageCellContainer-{{ image.id }} {
+                    width: 100%;
+                    max-width: {{ width }}px;
+                  }
+                  .product-image--slider:not(.is-fullscreen) #CardImageContainer-{{ image.id }} {
+                    position: relative;
+                    height: 0;
+                    padding-bottom: {{ padding_ratio }}%;
+                  }
+                  .product-image--slider:not(.is-fullscreen) #CardImageContainer-{{ image.id }} img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                  }
+                  .product-image--slider.is-fullscreen #CardImageContainer-{{ image.id }} img {
+                    height: {{ height }}px;
+                    width: {{ width }}px;
+                  }
+                  {%- comment -%}{%- endcomment -%}
+                </style>
+              </a>
+            </div>
+
+          {% when 'external_video' %}
+            <div class="product-single__media" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+              {{ media | external_video_tag }}
+            </div>
+          {% when 'video' %}
+            <div class="product-single__media product-single__media--video product-single__media--{{ media.id }}" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+              {{ media | video_tag: class: 'media-video', image_size: image_size }}
+            </div>
+          {% when 'model' %}
+            <div class="product-single__media" style="padding-top: 100%">
+              {{ media | model_viewer_tag: image_size: image_size, reveal: 'interaction', toggleable: true, data-model-id: media.id }}
+            </div>
+          {% else %}
+            <div class="product-single__media" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;">
+              {{ media | media_tag: class: 'media-item', image_size: image_size }}
+            </div>
+        {% endcase %}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {% assign first_3d_model = product.media | where: "media_type", "model" | first %}
+
+  {%- if first_3d_model -%}
+    <button
+      aria-label="{{ 'products.product.view_in_space_label' | t }}"
+      class="product-single__view-in-space"
+      data-shopify-xr
+      data-shopify-model3d-id="{{ first_3d_model.id }}"
+      data-shopify-title="{{ product.title }}"
+      data-shopify-xr-hidden
+    >
+      {% include 'icon-3d-badge-full-color' %}<span class='product-single__view-in-space-text'>{{ 'products.product.view_in_space' | t }}</span>
+    </button>
+  {%- endif -%}
+  
+  {%- if product.images.size != 1 and section.settings.show_dots -%}
+  <ol class="flickity-page-dots placeholder">
+    {%- for image in product.images -%}
+      <li class="dot"></li>
+    {%- endfor -%}
+  </ol>
+  {%- endif -%}
+</div>

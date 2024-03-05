@@ -1,0 +1,83 @@
+<style>
+
+   .section1{
+            background-image: url("https://cdn.shopify.com/s/files/1/0529/8647/8778/files/1_621dbf51-a222-4be2-a71b-a23c8ff14889.png?v=1689003578");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+        }
+        .innersection1{
+            padding-right: 10vw;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .innersection1 h1{
+            font-size: 70px;
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+             font-size: 50px;
+    margin: 0 0 0.1em;
+    line-height: 1.2;
+                    margin-bottom: 50px;
+/*                   color: black !important; */
+                  letter-spacing: 8px;
+                      font-family: 'Saira Condensed', sans-serif !important;
+              color: #ffffff !important;
+    font-size: 60px !important;
+    letter-spacing: 10px;
+          font-weight: 800;
+          font-family: Saira Condensed;
+font-size: 75px;
+font-weight: 700;
+line-height: 71px;
+letter-spacing: 0.14em;
+text-align: left;
+
+        }
+
+        @media screen and (max-width: 768px) {
+           .section1{
+            height: 30vh;
+           }
+            .innersection1 h1{
+                font-size: 42px !important;
+            }            
+        }
+</style>
+
+
+
+ <section class="section1">
+            <div class="innersection1">
+                <h1>{{ section.settings.title  }}</h1>
+            </div>
+        </section>
+        
+
+{% schema %}
+ {
+    "name": "Ad-heading",
+    "settings": [
+        {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "COMMUNITY"
+    }
+    ],
+    "presets": [
+      {
+        "name": "Ad-heading"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

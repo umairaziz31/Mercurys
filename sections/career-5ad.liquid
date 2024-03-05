@@ -1,0 +1,171 @@
+<style>
+          .sectioncareer5{
+            height: 100%;
+            max-width: 1400px;
+            margin: auto;
+            width: 100%;
+           /* border:2px solid black; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            flex-direction: column;
+/*             gap: 50px; */
+        }
+        .sectioncareer5 h1{
+            font-family: Saira Condensed;
+font-size: 60px;
+font-weight: 700;
+line-height: 64px;
+letter-spacing: 0.12em;
+text-align: center;
+text-transform: uppercase;
+          color: black;
+        }
+        .sectioncareer5 .innervalues{
+            /* height: 100%; */
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            /* align-items: center; */
+            /* flex-direction: column; */
+            flex-wrap: wrap;
+            gap: 25px;
+            
+        }
+        .sectioncareer5 .innervalues img{
+            /* width: 200px; */
+        }
+        .redad{
+            color: #D32541;
+        }
+        .sectioncareer5 .cardvalue{
+            width: 250px;
+            height: 200px;
+            /* border: 2px solid #D32541; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+        }
+        .sectioncareer5 .cardvalue h4{
+            font-family: Saira Condensed;
+font-size: 30px;
+text-transform: uppercase;
+font-weight: 700;
+line-height: 33px;
+letter-spacing: 0.07em;
+text-align: center;
+    color: black;
+        }
+
+        .sectioncareer5 .cardvalue img{
+            width: 120px;
+         }
+
+         /* maek this responsive */
+            @media only screen and (max-width: 600px){
+                .sectioncareer5{
+                    padding: 0;
+                }
+              .sectioncareer5 h1{
+                font-size:30px;
+                  line-height: 30px;
+              }
+                .sectioncareer5 h4{
+                    font-size: 25px;
+                    line-height: 25px;
+                }
+                .sectioncareer5 .innervalues{
+                    flex-direction: column;
+                    gap: 0;
+                }
+                .sectioncareer5 .cardvalue{
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    /* border: 2px solid #D32541; */
+                }
+                .sectioncareer5 .cardvalue h4{
+                    font-size: 20px;
+                    line-height: 20px;
+                }
+                .sectioncareer5 .cardvalue img{
+                    width: 80px;
+                }
+            }
+</style>
+
+
+
+
+
+
+
+
+
+
+        <section class="sectioncareer5">
+          <h1><b class="redad">mercurys</b> values</h1>
+          <div class="innervalues contain-site-width">
+            <div class="cardvalue">
+                  <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val1.png?v=1689694029" alt="">
+                  <h4>Passion</h4>
+              </div> 
+          
+              <div class="cardvalue">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val2.png?v=1689694030" alt="">
+                <h4>excellence</h4>
+            </div> 
+
+            <div class="cardvalue">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val3.png?v=1689694029" alt="">
+                <h4>Integrity</h4>
+            </div> 
+
+            <div class="cardvalue">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val4.png?v=1689694030" alt="">
+                <h4>Continuous Learning</h4>
+                </div>
+
+                <div class="cardvalue">
+                    <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val5.png?v=1689694030" alt="">
+                    <h4>Collaboration</h4>
+                    </div>
+
+                    <div class="cardvalue">
+                        <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val6.png?v=1689694030" alt="">
+                        <h4>Customer-centric</h4>
+                        </div>
+
+                        <div class="cardvalue">
+                            <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/val7.png?v=1689694030" alt="">
+                            <h4>Community</h4>
+                            </div>
+        
+        </div>
+        </section>
+
+{% schema %}
+  {
+    "name": "career-Section-5",
+    "settings": [],
+    "presets": [
+      {
+        "name": "career-Section-5"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

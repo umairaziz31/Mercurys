@@ -1,0 +1,252 @@
+<div class="looks {% if section.settings.full_width %}full-width{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-section-type="looks">
+  <div class="wrapper">
+    <header>
+      {% if section.settings.title != blank %}
+        <h4>{{ section.settings.title | escape }}</h4>
+      {% else %}
+        {% if section.settings.show_button %}
+          <a href="{{ section.settings.link }}" class="button outline">{{ section.settings.button_label | escape }}</a>
+        {% endif %}
+      {% endif %}
+    </header>
+    <div class="looks__container" 
+      data-rows="{{ section.settings.images_per_row }}" 
+      data-rows-mobile="{{ section.settings.images_per_row_mobile }}">
+
+      {%- for block in section.blocks -%}
+        <div class="looks__item" 
+          data-id="{{ block.id }}"
+          {{ block.shopify_attributes }}>
+          <div class="looks__image-container box photo">
+            <figure>
+              {%- assign image = block.settings.image -%}
+              {%- if image != blank -%}
+                {%- capture image_padding_top -%}
+                  {%- if section.settings.image_ratio == 'auto' -%}
+                    {{ 1 | divided_by: image.aspect_ratio | times: 100}}%
+                  {%- else -%}
+                    {{ section.settings.image_ratio }}
+                  {%- endif -%}
+                {%- endcapture -%}
+
+                <a href="{% if block.settings.link %}{{ block.settings.link }}{% else %}#{% endif %}" 
+                  class="looks__item--overlay card__image-wrapper {% unless section.settings.image_ratio == 'auto'%}card__image-wrapper--manual{%- endunless -%}"
+                  style="padding-top:{{ image_padding_top | strip }}"
+                  data-overlay="{{ block.settings.enable_overlay }}">
+
+                  {% assign image_widths = '295,394,590,700,800,1000,1200,1500,1800,2000,2400' %}
+                  {% include 'theme-rias' %}
+                  <img class="card__image lazyload"
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    data-src="{{ image_url_pattern }}"
+                    data-widths="[{{ image_widths }}]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    data-expand="600"
+                    data-fallback="{{ image | img_url: '295x' }}"
+                    alt="{{ image.alt | escape }}">
+                  <noscript>
+                    <img class="card__image" src="{{ image | img_url: '394x' }}" alt="{{ image.alt | escape }}">
+                  </noscript>
+                  {%- if block.settings.enable_overlay -%}
+                    <figcaption class="looks__caption">
+                      {%- if block.settings.title != blank -%}
+                        <h4>{{ block.settings.title | escape }}</h4>
+                      {%- endif -%}
+                      {%- if block.settings.text != blank -%}
+                        <div class="looks__caption--text rte" data-rte="{{ block.settings.text | escape }}">
+                          {{ block.settings.text | strip_html }}
+                        </div>
+                      {%- endif -%}
+                    </figcaption>
+                  {%- endif -%}
+                </a>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+            </figure>
+          </div>
+
+          <div class="looks__products">
+            {%- if block.settings.product_1 != blank -%}
+              {%- assign product = all_products[block.settings.product_1] -%}
+              {% include 'product-grid-item' %}
+            {%- endif -%}
+            {%- if block.settings.product_2 != blank -%}
+              {%- assign product = all_products[block.settings.product_2] -%}
+              {% include 'product-grid-item' %}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+
+    </div>
+    {% if section.settings.title != blank %}
+    <footer>
+      {% if section.settings.show_button %}
+        <a href="{{ section.settings.link }}" class="button large outline">{{ section.settings.button_label | escape }}</a>
+      {% endif %}
+    </footer>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop the Look",
+  "class": "shop-the-look",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop The Look"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Follow Us"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Expand to full browser width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "images_per_row",
+      "label": "Images per row",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "images_per_row_mobile",
+      "label": "Mobile - Images per row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Fit images to ratio",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto detect ratio"
+        },
+        {
+          "value": "100%",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "150%",
+          "label": "Portrait (2:3)"
+        },
+        {
+          "value": "75%",
+          "label": "Landscape (4:3)"
+        }
+      ],
+      "default": "100%"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional"
+        },
+        {
+          "type": "header",
+          "content": "Details overlay"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_overlay",
+          "label": "Enable",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1",
+          "info": "Optional"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2",
+          "info": "Optional"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop the Look",
+      "category": "Social media",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

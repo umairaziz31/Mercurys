@@ -1,0 +1,53 @@
+<div class="thumbnails" data-enable-group="{{ section.settings.enable_thumb_slider }}">
+  <ul id="ProductThumbs-{{ section.id }}" data-ProductThumbs>
+    {% for media in product.media %}
+      {%- assign image = media.preview_image -%}
+      {%- assign image_width = image.width | append: 'x' -%}
+      {%- assign image_highresolution = image | img_url: image_width -%}
+      {%- assign active_image = current_variant.featured_media.preview_image | default: product.featured_media.preview_image -%}
+      <li>
+        {%- capture thumbnailAlt -%}
+          {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+            {{ 'sections.featured_product.video_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+          {%- elsif media.media_type == 'model' -%}
+            {{ 'sections.featured_product.model_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+          {%- else -%}
+            {{ 'sections.featured_product.gallery_thumbnail_alt' | t: imageAlt: media.alt | escape }}
+          {%- endif -%}
+        {%- endcapture -%}
+        <a href="{{ image_highresolution }}"
+          class="product-single__thumbnail--{{ section.id }} {% if image == active_image %}active{% endif %}"
+          data-media-id="{{ section.id }}-{{ media.id }}"
+          data-image-id="{{ media.id }}">
+          {% assign image_widths = '85,100,200,295,394,590,720,800' %}
+          {% include 'theme-rias' %}
+          <img class="lazyload"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-default="{{ image | img_url: '394x' }}"
+            data-src="{{ image_url_pattern }}"
+            data-src-pattern="{{ image_url_pattern }}"
+            data-widths="[{{ image_widths }}]"
+            data-aspectratio="{{ image.aspect_ratio }}"
+            data-sizes="auto"
+            data-position="{{ forloop.index0 }}"
+            data-max-width="{{ image.width }}"
+            alt="{{ thumbnailAlt }}">
+          <noscript>
+            <img src="{{ image | img_url: '100x' }}" alt="{{ image.alt | escape }}">
+          </noscript>
+          {%- if media.media_type == 'video' or media.media_type =='external_video' -%}
+            <div class="product-single__thumbnail-badge">
+              {% include 'icon-video-badge-full-color' %}
+            </div>
+          {%- endif -%}
+          {%- if media.media_type == 'model' -%}
+            <div class="product-single__thumbnail-badge">
+              {% include 'icon-3d-badge-full-color' %}
+            </div>
+          {%- endif -%}
+        </a>
+      </li>
+    {% endfor %}
+
+  </ul>
+</div>

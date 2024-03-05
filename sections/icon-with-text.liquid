@@ -1,0 +1,195 @@
+<style>
+  .icon-txt-sec header h4{
+    color: #000;
+    text-align: center;
+    font-family: Saira Condensed;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 3.6px;
+    text-transform: uppercase;
+    margin: 0 0 30px;
+  }
+  .icon-txt-sec header h4 strong{
+    color: #D32541;
+  }
+  .icon-with-text{
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .icon-with-text .icontxt-inner{
+    width: 33.33% !important;
+    margin: 0 !important;
+    padding: 0 20px;
+  }
+  .icon-with-text .quarter-inner{
+    width: 25% !important;
+  }
+  .icon-with-text .icontxt-inner .icon_content p{
+    color: #000 !important;
+    text-align: center;
+    font-family: Saira Condensed;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 3px;
+    margin: 30px 0 0;
+  }
+  .icon-with-text .icontxt-inner .icon_content p strong{
+    font-weight: 700 !important;
+    color: #D32541 !important;
+  }
+
+  @media(max-width: 767px){
+    .icon-with-text{
+      flex-direction: column;
+    }
+    .icon-with-text .icontxt-inner{
+      width: 100% !important;
+      padding: 0 10px;
+    }
+    .icon-with-text .quarter-inner{
+      width: 100% !important;
+    }
+  }
+</style>
+
+<div class="logo-list icon-txt-sec logo-list-{{ section.id }} section-standard" data-section-id="{{ section.id }}" data-section-type="logo-list-section">
+  <div class="contain-site-width">
+    <div class="wrapper">
+      {% if section.settings.title != blank %}
+        <header>
+          <h4>{{ section.settings.title }}</h4>
+        </header>
+      {% endif %}
+
+      <div class="logo-bar icon-with-text">
+        {% for block in section.blocks %}
+          <div id="block-{{ block.id }}" class="logo-bar__item icontxt-inner {% if block.size >= 4 %}quarter-inner{% endif %}" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="logo-bar__link">
+            {% endif %}
+            {% assign image = block.settings.image %}
+            {% if image != blank %}
+
+                {% assign image_widths = '100,180,260,340,420,500' %}
+                {% include 'theme-rias' %}
+                <img class="lazyload"
+                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  data-src="{{ image_url_pattern }}"
+                  data-widths="[{{ image_widths }}]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ image.alt }}">
+                <noscript>
+                  <img class="" src="{{ image | img_url: '160x' }}" alt="{{ image.alt }}">
+                </noscript>
+
+            {% else %}
+              {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+            <div class="icon_content">
+              {{ block.settings.content }}
+            </div>
+          </div>
+          <style media="screen">
+            #block-{{ block.id }} img {
+              max-width: {{ image.width }}px;
+              height: {{ image.width }}px;
+            }
+          </style>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .logo-list-{{ section.id }} .logo-bar__item {
+    width: {{ section.settings.logo_width }}px;
+    margin: {{ section.settings.logo_margins }}px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Icon with text",
+  "class": "logo-list-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "headquarters info"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 160
+    },
+    {
+      "type": "range",
+      "id": "logo_margins",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Column spacing",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_image",
+      "name": "Icon Text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Optional"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon with text",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        },
+        {
+          "type": "icon_image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

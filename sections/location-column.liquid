@@ -1,0 +1,252 @@
+<style>
+  .icon-txt-sec header h4{
+    color: #000;
+    text-align: center;
+    font-family: Saira Condensed;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 3.6px;
+    text-transform: uppercase;
+    margin: 0 0 30px;
+  }
+  .icon-txt-sec header h4 strong{
+    color: #D32541;
+  }
+  .multicol .icon-with-text{
+    justify-content: space-between;
+    align-items: unset;
+    height: 100%;
+  }
+  .icon-with-text .icontxt-inner{
+    width: 33.33% !important;
+    margin: 0 !important;
+    padding: 0 20px;    
+  }
+  .multicol .icontxt-inner .box{
+    background: #FFF;
+    box-shadow: 5px 10px 20px -2px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    height: 100%;
+  }
+  .multicol .icontxt-inner .box h3{
+    color: #000;
+    text-align: center;
+    font-family: Saira Condensed;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 3px;
+    margin: 0 0 20px;
+    min-height: 80px;
+  }
+  .multicol .content-list li{
+    display: flex;
+    align-items: start;
+    text-align: left;
+    padding-bottom: 20px;
+  }
+  .multicol .content-list li:last-of-type{
+    padding-bottom: 0;
+  }
+  .multicol .content-list li img{
+    margin-right: 10px;
+  }
+  .icon-with-text .quarter-inner{
+    width: 25% !important;
+  }
+  .icon-with-text .icontxt-inner .content-list p{
+    color: #000 !important;
+    text-align: left;
+    font-family: Saira Condensed;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 1.5px;
+    margin: 0;
+  }
+  .icon-with-text .icontxt-inner .content-list p strong{
+    font-weight: 400 !important;
+    color: #D32541 !important;
+  }
+  .multicol .view-btn{
+    text-align: center;
+    width: 100%;
+    margin: 80px 0 0;
+  }
+  .multicol .view-btn .button{
+    background: #000;
+    text-align: center;
+    font-family: Saira Condensed;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 700;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 200px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  .multicol .content-list li.first p{
+    min-height: 66px;
+  }
+
+  @media(max-width: 767px){
+    .icon-with-text{
+      flex-direction: column;
+    }
+    .icon-with-text .icontxt-inner{
+      width: 100% !important;
+      padding: 0 10px;
+    }
+    .icon-with-text .quarter-inner{
+      width: 100% !important;
+    }
+    .multicol .content-list img{
+      width: 30px !important;
+      height: auto !important;
+    }
+    .multicol .icontxt-inner .box{
+      margin: 0 0 30px;
+    }
+    .multicol .view-btn{
+      margin: 50px 0 0;
+    }
+    .multicol .icontxt-inner .box h3,
+    .multicol .content-list li.first p{
+      min-height: unset;
+    }
+  }
+</style>
+
+<div class="logo-list icon-txt-sec multicol logo-list-{{ section.id }} section-standard" data-section-id="{{ section.id }}" data-section-type="logo-list-section">
+  <div class="contain-site-width">
+    <div class="wrapper">
+      {% if section.settings.title != blank %}
+        <header>
+          <h4>{{ section.settings.title }}</h4>
+        </header>
+      {% endif %}
+
+      <div class="logo-bar icon-with-text">
+        {% for block in section.blocks %}
+          <div id="block-{{ block.id }}" class="logo-bar__item icontxt-inner {% if block.size >= 4 %}quarter-inner{% endif %}" {{ block.shopify_attributes }}>
+            <div class="box">
+              <h3>{{ block.settings.title }}</h3>
+              <ul class="content-list">
+                <li class="first">
+                  {% if block.settings.content1 != blank %}
+                    <img src="{{ block.settings.icon1 | img_url: '30x' }}">
+                    <p>{{ block.settings.content1 }}</p>
+                  {% endif %}
+                </li>
+                <li>
+                  {% if block.settings.content2 != blank %}
+                    <img src="{{ block.settings.icon2 | img_url: '30x' }}">
+                    <p>{{ block.settings.content2 }}</p>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="view-btn">
+          <a href="{{ section.settings.all_link }}" class="button solid">{{ section.settings.btn_text }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .logo-list-{{ section.id }} .logo-bar__item {
+    width: {{ section.settings.logo_width }}px;
+    margin: {{ section.settings.logo_margins }}px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Location Column",
+  "class": "logo-list-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "headquarters info"
+    },
+    {
+      "type": "url",
+      "id": "all_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "View All"
+    },
+    {
+      "type": "range",
+      "id": "logo_margins",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Column spacing",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Location Column",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon1",
+          "label": "Icon 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "content1",
+          "label": "Content 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon2",
+          "label": "Icon 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "content2",
+          "label": "Content 2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Location Column",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

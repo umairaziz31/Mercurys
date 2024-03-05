@@ -1,0 +1,414 @@
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .aboutsec1{
+            max-width: 1180px;
+            margin: auto;
+            /* border: 2px solid red; */
+            margin-top: 70px;
+            margin-bottom: 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+
+        }
+      .mainabout{
+            overflow: hidden;
+        padding: 10px;
+      }
+      .mainabout p{
+        color: black !important;
+      }
+       .mainabout h1{
+color:black;
+
+      }
+        .aboutsec1 h1{
+            font-family: Saira Condensed;
+font-size: 60px;
+font-weight: 700;
+line-height: 57px;
+letter-spacing: 0.04em;
+text-align: center;
+color:black;
+        }
+        .aboutsec1 img{
+            width: 100%;
+            height: 100%;
+          position: relative;
+/*      left: 7%; */
+        }
+
+        /* make this responsive */
+        @media only screen and (max-width: 768px){
+            .aboutsec1{
+/*                 padding: 20px; */
+            }
+            .mainabout h1{
+                font-size: 35px !important;
+                  line-height: 35px;
+                text-align: center !important;
+            }
+            .mainabout p{
+                text-align: center !important;
+            }
+            .aboutsec1 h1{
+                font-size: 30px;
+            }
+        }
+        .aboutsec2{
+            max-width: 1180px;
+            margin: auto;
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 70px;
+            margin-bottom: 70px;
+        }
+        .aboutsec2 .left{
+            width: 47%;
+            height: 100%;
+            /* float: left; */
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            gap: 50px;
+            flex-direction: column;
+        }
+        .aboutsec2 .right{
+            width: 47%;
+            /* float: left; */
+            height: 100%;
+            /* border: 2px solid red; */
+           
+        }
+        .aboutsec2 .left h1{
+            font-family: Saira Condensed;
+font-size: 60px;
+font-weight: 700;
+line-height: 57px;
+letter-spacing: 0.04em;
+text-align: left;
+
+        }
+        .aboutsec2 .left p{
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+           font-family: Saira Condensed;
+        }
+        .aboutsec2 .right img{
+            width: 100%;
+            height: 100%;
+        }
+        /* make this responsive */
+        @media only screen and (max-width: 768px){
+            .aboutsec2{
+                /* margin-top: 20px; */
+                margin-bottom: 0px;
+                flex-direction: column;
+                padding: 20px;
+
+            }
+            .aboutsec2 .left{
+                width: 100%;
+                height: 100%;
+                margin-bottom: 50px;
+                  gap: 0px;
+            }
+            .aboutsec2 .right{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .aboutsec3{
+            max-width: 1180px;
+            margin: auto;
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 70px;
+            margin-bottom: 70px;
+        }
+        .aboutsec3 .left{
+            width: 47%;
+            height: 100%;
+            /* float: left; */
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            gap: 50px;
+            flex-direction: column;
+        }
+        .aboutsec3 .right{
+            width: 47%;
+            /* float: left; */
+            height: 100%;
+            /* border: 2px solid red; */
+           
+        }
+        .aboutsec3 .left img{
+            width: 100%;
+            height: 100%;
+        }
+        .aboutsec3 .right p{
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+            font-family: Saira Condensed;
+        }
+        .aboutsec3 .right p b{
+            font-size: 20px;
+           color: #D32541;
+            font-weight: 700;
+            line-height: 1.5;
+            font-family: Saira Condensed;
+        }
+
+        /* make this responsive */
+        @media only screen and (max-width: 768px){
+            .aboutsec3{
+                flex-direction: column-reverse;
+                padding: 20px;
+              margin-bottom: 0px;
+              margin-top: 0px;
+            }
+            .aboutsec3 .left{
+                width: 100%;
+                height: 100%;
+                margin-bottom: 50px;
+            }
+            .aboutsec3 .right{
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .aboutsec4{
+            max-width: 1180px;
+            margin: auto;
+            gap: 30px;
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: space-between;
+             flex-direction: column;
+            align-items: center;
+            margin-top: 70px;
+            margin-bottom: 70px;
+        }
+        .aboutsec4 p{
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+            font-family: Saira Condensed;
+            text-align: center;
+        }
+        .aboutsec4 img{
+            width: 100%;
+            height: 100%;
+        }
+
+        /* make this responsive */
+        @media only screen and (max-width: 768px){
+           
+          .aboutsec4{
+                flex-direction: column;
+                margin-top: 0px;
+                /* border: 2px solid red; */
+                padding: 20px;
+            }
+            
+        }
+
+        .aboutsec5{
+            max-width: 1180px;
+            margin: auto;
+            gap: 30px;
+            /* border: 2px solid red; */
+            display: flex;
+            justify-content: space-between;
+             flex-direction: column;
+            align-items: center;
+            gap: 80px;
+            margin-top: 70px;
+            margin-bottom: 170px;
+        }
+        .aboutsec5 h1{
+            font-family: Saira Condensed;
+font-size: 60px;
+font-weight: 700;
+line-height: 57px;
+letter-spacing: 0.04em;
+text-align: center;
+        }
+      .mob-img{
+        display: none;
+      }
+
+        .aboutsec5 .imagein{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .aboutsec5 .imagein img{
+            width:20%;
+            /* height: 100%; */
+        }
+        /* make this responsive */
+        @media only screen and (max-width: 768px){
+            .aboutsec5{
+                flex-direction: column;
+                padding: 20px;
+                  gap: 20px;
+              margin-bottom: 70px;
+            }
+            .aboutsec5 .left{
+                width: 100%;
+                height: 100%;
+                margin-bottom: 50px;
+            }
+            .aboutsec5 .right{
+                width: 100%;
+                height: 100%;
+            }
+            .aboutsec5 .imagein{
+                flex-direction: column;
+                gap:30px;
+            }
+            .aboutsec5 .imagein img{
+                width: 50%;
+                margin-bottom: 20px;
+            }
+          .adimage img{
+            position: relative;
+    left: 7%;
+          }
+          .mob-img{
+            display: block;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+          }
+          .mob-img:before {
+            content: '';
+            position: absolute;
+            top: -14%;
+            border-left: 2px solid #000;
+            width: 2px;
+            height: 700px;
+            z-index: -1;
+            left: 52%;
+          }
+          .mob-img img{
+            margin-bottom: 50px;
+          }
+          .mob-img img{
+            max-width: 65%;
+          }
+        }
+
+    </style>
+
+    <section class="mainabout">
+        <section class="aboutsec1">
+            <h1>MERCURYS <b style="color: #D32541;"> MISSION</b></h1>
+            <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/Group_121_1.png?v=1690384165" alt="">
+         </section>
+    
+         <section class="aboutsec2">
+             <div class="left">
+                <h1>FROM THE <b style="color: #D32541;">BEGINNING </b>  </h1>
+                <p>We are a local company founded in Woodinville, Washington, by Morgan Harris in 1998. Over the years, we have grown to 12 Eastside locations and 225(or so) wonderful people making the magic happen.</p>
+             </div>
+             <div class="right">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_104.png?v=1689783062" alt="">
+             </div>
+         </section>
+    
+    
+         <section class="aboutsec3">
+            <div class="left">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/Group_185.png?v=1689783063" alt="">
+            </div>
+            <div class="right">
+                <p>We have won several awards over the years for our commitment to excellence. In Evening Magazine's <b> "Best of Western Washington" </b> competition, we were voted #1 six times in a row in 2012, 2013, 2014, 2015, 2016, and 2017 out of 372-426 nominees each year. In 2015 and 2016, we received the <b>"Best of Kirkland" </b>award, and most recently, in 2015, 2016, 2017, 2018, 2019, 2020, 2021 & 2022, we won the <b>"Best of 425 Magazine".</b></p>
+            </div>
+         </section>
+    
+         <section class="aboutsec4">
+            <p>To maintain our award-winning blend, we’re continually sourcing superior quality organic coffee from around the globe. We also strive to provide all-natural, minimally processed, and certified organic ingredients. All our milk is certified rBST/hormone-free with the option to go 100% organic. We carry five dairy alternatives (Oat, Coconut, Almond, Soy, and Hemp), six certified organic flavors, 30 regular flavors, and ten sugar-free flavors, including sugar-free white and dark chocolates.</p>
+            <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/Group_125.png?v=1689785367" alt="">
+          <p>Whatever your drink choice maybe, you can expect to find it at Mercurys and enjoy it with the peace of mind that you’ve received the highest quality ingredients and service found anywhere in the industry.
+    <br><br>
+            We combine this with our personal experience, which continues to set us apart from the rest.</p>
+        </section>
+    
+    
+        <section class="aboutsec5">
+            <h1>FEATURED <b style="color: #D32541;">IN</b> </h1>
+            <div class="imagein">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_110.png?v=1689786146" alt="">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_111.png?v=1689786147" alt="">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_112.png?v=1689786146" alt="">
+                <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_113.png?v=1689786146" alt="">
+            </div>
+        </section>
+        <section class="aboutsec1 mianpage adimage">
+            <h1>MERCURYS <b style="color: #D32541;">MILESTONES</b></h1>
+            <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/ssss_d1b627f4-1949-46e3-af49-a155301fafd5.png?v=1689948632" alt="">
+         </section>        
+    </section>
+    <div class="mob-img">
+      <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_131.png?v=1691097547">
+      <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/image_133.png?v=1691097547">
+    </div>
+
+
+     <script>
+        const mian = document.querySelector('.mianpage').querySelector('img');
+        const mobilesrc = "https://cdn.shopify.com/s/files/1/0529/8647/8778/files/Group_1000001783_1.png?v=1700070899";
+        const desktopsrc = "https://cdn.shopify.com/s/files/1/0529/8647/8778/files/Group_1000001779.png?v=1699999720";
+        
+
+        function myFunction(x) {
+            if (x.matches) { 
+                mian.src = mobilesrc;
+            } else {
+                mian.src = desktopsrc;
+            }
+        }
+
+        var x = window.matchMedia("(max-width: 600px)")
+        myFunction(x) 
+        x.addListener(myFunction) 
+
+
+     </script>
+
+{% schema %}
+   {
+    "name": "about-Section-1",
+    "settings": [],
+    "presets": [
+      {
+        "name": "about-Section-1"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

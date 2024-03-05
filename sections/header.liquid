@@ -1,0 +1,337 @@
+<style>
+  header.site-header.minimal nav.nav-bar ul.site-nav > li > a {
+font-family: Saira Condensed;
+font-size: 20px;
+font-weight: 600;
+line-height: 24px;
+letter-spacing: 0.06em;
+text-align: center;
+
+  }
+  #menu.panel ul.site-nav li a {
+    font-family: Saira Condensed;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .icon-text img{
+  
+         position: relative;
+    top: 4px;
+    height: 29px;
+    width: 36px;
+  }
+  #menu.panel ul.site-nav li{
+    border: 0px solid !important;
+  }
+   header.site-header.minimal .wrapper{
+    display: flex;
+    flex-direction: row-reverse;
+     align-items:center;
+     justify-content: center;
+  }
+  html.panel-open nav#menu, body.panel-open nav#menu {
+/*     height: fit-content; */
+    overflow: auto;
+  }
+  {% if section.settings.top_bar_full_width %}
+  header.util .wrapper {
+    padding: 0;
+    max-width: 100%;
+  }
+  header.util .wrapper .left-wrapper,
+  header.util .wrapper .right-wrapper {
+    margin: 6px 20px;
+  }
+  {% endif %}
+  .site-logo.has-image {
+    max-width: {{ section.settings.logo_max_width }}px;
+  }
+  header.site-header .layout-horizontal .logo-contain {
+    flex-basis: {{ section.settings.logo_max_width }}px;
+  }
+  {%- if section.settings.show_locale_selector == false -%}
+    header.util .selectors-form__item--locale {
+      display: none;
+    }
+  {%- endif -%}
+  {%- if section.settings.show_currency_selector == false -%}
+    header.util .selectors-form__item--currency {
+      display: none;
+    }
+  {%- endif -%}
+
+  @media(min-width: 900px) and (max-width: 1500px){
+    header.site-header.minimal nav.nav-bar ul.site-nav > li > a {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.2px;
+      padding: 6px 8px !important;
+    }
+  }
+</style>
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <div class="site-header-wrapper">
+    <header class="site-header {% if section.settings.minimal_padding == "minimal" %}minimal{% endif %} {% if section.settings.header_full_width %}full-width{% endif %}" data-scroll-lock="{{ section.settings.scroll_lock }}" role="banner">
+
+      <div class="wrapper">
+        <div class="logo-nav-contain layout-{{ section.settings.header_layout }}">
+          {% comment %}
+            Use the uploaded logo from theme settings if enabled.
+            Site name gets precedence with H1 tag on homepage, div on other pages.
+          {% endcomment %}
+          <div class="logo-contain">
+            {% if template.name == 'index' %}
+              <h1 class="site-logo {% if section.settings.logo %}has-image{% endif %}">
+            {% else %}
+              <div class="site-logo {% if section.settings.logo %}has-image{% endif %}">
+            {% endif %}
+              {% if section.settings.logo %}
+                {%- assign image = section.settings.logo -%}
+                <a href="{{ routes.root_url }}" class="logo-image card__image-wrapper" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%">
+                    {%- assign image_default_width = section.settings.logo_max_width -%}
+                    {%- assign image_default = image_default_width | append: 'x' -%}
+                    {%- assign image_widths = '' -%}
+                    {%- for i in (1..3) -%}
+                      {%- assign width = image_default_width | times: i -%}
+                      {%- assign image_widths = image_widths | append: width -%}
+                      {%- unless forloop.last -%}
+                        {%- assign image_widths = image_widths | append: ',' -%}
+                      {%- endunless -%}
+                    {%- endfor -%}
+                    {% include 'theme-rias' %}
+                    <img class="card__image lazyload"
+                      src="{{ image | img_url: image_default }}"
+                      data-src="{{ image_url_pattern }}"
+                      data-widths="[{{ image_widths }}]"
+                      data-aspectratio="{{ image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ image.alt | escape | default: shop.name  }}">
+                </a>
+              {% else %}
+                <a href="{{ routes.root_url }}">{{ shop.name }}</a>
+              {% endif %}
+            {% if template.name == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+
+          <nav class="nav-bar" role="navigation">
+            {% include 'site-nav' %}
+          </nav>
+          <style>
+            header.util a#CartButton{
+              border: 0;
+              position: relative;
+            }
+            #CartCount{
+              position: absolute;
+              top: -5px;
+            }
+            header.util a#CartButton:hover, header.util a#CartButton:focus { opacity: 1;
+              background-color: unset;
+              color: #ed174f;
+            }
+            header.util a#CartButton:hover svg path, header.util a#CartButton:focus svg path {
+              fill: #ed174f;
+            }
+          </style>
+          <div class="ico-cart">
+          <header class="util">
+            <a href="{{ routes.cart_url }}" id="CartButton">
+              <span class="icon-fallback-text">
+                {%- assign cart_icon = 'icon-ui-' | append: settings.cart_icon -%}
+                <span class="icon icon-cart" aria-hidden="true">{% include cart_icon %}</span>
+              </span>
+              <span id="CartCount">{{ cart.item_count }}</span>             
+            </a>
+            {% if settings.ajax_cart_enable %}
+              {% include 'cart-preview' %}
+            {% endif %}
+            </header>
+          </div>
+        </div>
+
+      <nav  class="mobile-menu">
+          <a href="#menu" class="toggle-menu menu-link">
+            <span class="icon-text">
+  <img src="https://cdn.shopify.com/s/files/1/0529/8647/8778/files/ion_menu.png?v=1689954764">
+<!--               <span class="icon icon-menu" aria-hidden="true">{% include 'icon-ui-menu' %}</span> -->
+<!--               <span class="text" data-close-text="{{ 'layout.drawers.close_menu' | t }}">{{ 'layout.navigation.menu' | t }}</span> -->
+            </span>
+          </a>
+        </nav>
+      </div>
+
+  <style>
+       @media screen and (min-width: 800px) {
+             .mobile-menu{
+                        display: none;
+             }
+       }
+  </style>
+                 
+              
+    </header>
+  </div>
+</div>
+
+<nav id="menu" class="panel" role="navigation">
+  <div class="search">
+    {% include 'search-bar' %}
+  </div>
+
+  {% include 'site-nav-mob' %}
+
+  <div class="account">
+    {% if shop.customer_accounts_enabled %}
+      {% include 'accounts-nav' %}
+    {% endif %}
+  </div>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    {%- assign image_size = section.settings.logo.width | append:'x' -%}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  {%- capture same_as -%}
+    {%- assign social_links = 'Twitter,Facebook,Instagram,Pinterest,Tumblr,YouTube,Snapchat,Spotify,Google Plus,Medium,LinkedIn,Amazon' | split: ',' -%}
+    {%- for link in social_links -%}
+      {%- assign setting_val = 'social_' | append: link | append: '_link' | downcase -%}
+      {%- if settings[setting_val] != blank -%}{{ settings[setting_val] | json }},{%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign same_as_size = same_as | size | minus: 1 -%}
+  "sameAs": [ {{ same_as | slice: 0, same_as_size }} ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+</script>
+
+{% if request.page_type == 'index' %}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "header",
+  "settings": [
+    {
+      "type": "radio",
+      "id": "header_layout",
+      "label": "Logo placement",
+      "options": [
+        { "value": "horizontal", "label": "Left aligned" },
+        { "value": "vertical", "label": "Centered" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 100,
+      "max": 1180,
+      "step": 20,
+      "unit": "px",
+      "label": "Logo maximum width",
+      "default": 280
+    },
+    {
+      "type": "link_list",
+      "id": "main_linklist",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "mega_menu",
+      "label": "Enable mega menu style",
+      "default": false,
+      "info": "Display nested menu links in columns"
+    },
+    {
+      "type": "select",
+      "id": "scroll_lock",
+      "label": "Lock while scrolling",
+      "options": [
+        { "value": "util", "label": "Top bar" },
+        { "value": "header", "label": "Header" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "util"
+    },
+    {
+      "type": "radio",
+      "id": "minimal_padding",
+      "label": "Header size",
+      "options": [
+        { "value": "minimal", "label": "Minimal" },
+        { "value": "normal", "label": "Normal" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_bar_full_width",
+      "label": "Expand top bar full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "header_full_width",
+      "label": "Expand header full width",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Language Selector",
+      "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "Show language selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Currency Selector",
+      "info": "To add a currency, go to your [payment settings.](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "label": "Show currency selector",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+<style>
+   .section7{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                max-width: 1500px;
+                margin:30px auto;
+                width: 100%;                             
+             }
+</style>
+
+
+
+
+
+                                <section class="section7 contain-site-width">
+                                    <iframe width="75%" height="400px" src={{ section.settings.videolink }} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </section>
+
+ 
+
+
+{% schema %}
+ {
+    "name": "community-video",
+    "settings": [
+      {
+        "type": "text",
+        "id": "videolink",
+        "label": "Video Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "community-video"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
